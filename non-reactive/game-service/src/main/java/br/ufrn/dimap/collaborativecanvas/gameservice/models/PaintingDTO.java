@@ -2,35 +2,26 @@ package br.ufrn.dimap.collaborativecanvas.gameservice.models;
 
 
 public class PaintingDTO {
-    private long id;
-    private long pixel;
+    private long pixelId;
     private long playerId;
     private long canvaId;
 
     public PaintingDTO() {
     }
 
-    public PaintingDTO(long id, long pixelId, long playerId, long canvaId) {
-        this.id = id;
-        this.pixel = pixelId;
+    public PaintingDTO(long pixelId, long playerId, long canvaId) {
+        this.pixelId = pixelId;
         this.playerId = playerId;
         this.canvaId = canvaId;
     }
 
-    public long getId() {
-        return this.id;
+
+    public long getPixelId() {
+        return this.pixelId;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public long getPixel() {
-        return this.pixel;
-    }
-
-    public void setPixel(long pixel) {
-        this.pixel = pixel;
+    public void setPixel(long pixelId) {
+        this.pixelId = pixelId;
     }
 
     public long getPlayerId() {
