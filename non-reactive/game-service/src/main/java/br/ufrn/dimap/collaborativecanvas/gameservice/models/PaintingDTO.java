@@ -5,16 +5,25 @@ public class PaintingDTO {
     private long pixelId;
     private long playerId;
     private long canvaId;
+    private String color;
 
     public PaintingDTO() {
     }
 
-    public PaintingDTO(long pixelId, long playerId, long canvaId) {
+    public PaintingDTO(long pixelId, long playerId, long canvaId, String color) {
         this.pixelId = pixelId;
         this.playerId = playerId;
         this.canvaId = canvaId;
+        this.color = color;
     }
 
+    public String getcolor() {
+        return this.color;
+    }
+
+    public void setPixel(String color) {
+        this.color = color;
+    }
 
     public long getPixelId() {
         return this.pixelId;
