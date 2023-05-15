@@ -1,27 +1,16 @@
-package br.ufrn.dimap.collaborativecanvas.gameservice.models;
+package br.ufrn.dimap.collaborativecanvas.reactivegameservice.model;
 
 
-public class PaintingDTO {
+public class JogadaCanvaDTO {
     private Long pixelId;
     private Long playerId;
     private Long canvasId;
     private String color;
 
-    public PaintingDTO() {
-    }
-
-    public PaintingDTO(Long pixelId, Long playerId, Long canvasId, String color) {
+    public JogadaCanvaDTO(Long pixelId, Long playerId, Long canvasId, String color) {
         this.pixelId = pixelId;
         this.playerId = playerId;
         this.canvasId = canvasId;
-        this.color = color;
-    }
-
-    public String getcolor() {
-        return this.color;
-    }
-
-    public void setPixel(String color) {
         this.color = color;
     }
 
@@ -29,7 +18,7 @@ public class PaintingDTO {
         return this.pixelId;
     }
 
-    public void setPixel(Long pixelId) {
+    public void setPixelId(Long pixelId) {
         this.pixelId = pixelId;
     }
 
@@ -45,7 +34,17 @@ public class PaintingDTO {
         return this.canvasId;
     }
 
-    public void setCanvaId(Long canvasId) {
+    public void setCanvasId(Long canvasId) {
         this.canvasId = canvasId;
     }
+
+    public String getColor() {
+        return this.color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+
 }

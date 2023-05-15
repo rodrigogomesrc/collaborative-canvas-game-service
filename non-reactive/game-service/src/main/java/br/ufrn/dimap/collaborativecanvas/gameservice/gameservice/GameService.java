@@ -18,7 +18,7 @@ public class GameService {
         String jogadaPlayerURL = "http://localhost:8085/player/play";
         String joagadaCanvaURL = "http://localhost:8093/painting";
         HttpEntity<JogadaPlayerDTO> requestPlayer = new HttpEntity<>(new JogadaPlayerDTO(paint.getPlayerId()));
-        HttpEntity<JogadaCanvaDTO> requestCanva= new HttpEntity<>(new JogadaCanvaDTO(paint.getPixelId(), paint.getPlayerId(), paint.getCanvaId(), paint.getcolor()));
+        HttpEntity<JogadaCanvaDTO> requestCanva= new HttpEntity<>(new JogadaCanvaDTO(paint.getPixelId(), paint.getPlayerId(), paint.getCanvasId(), paint.getcolor()));
         ResponseEntity<Void> responsePlayer = restTemplate.exchange(jogadaPlayerURL, HttpMethod.PUT, requestPlayer, Void.class);
         ResponseEntity<Void> responseCanva = restTemplate.exchange(joagadaCanvaURL, HttpMethod.POST, requestCanva, Void.class);
         if( responsePlayer.getStatusCode().equals(HttpStatus.OK) && responseCanva.getStatusCode().equals(HttpStatus.OK)){
