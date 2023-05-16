@@ -12,33 +12,48 @@ import org.springframework.web.reactive.function.client.WebClient;
 import br.ufrn.dimap.collaborativecanvas.reactivegameservice.model.JogadaCanvaDTO;
 import br.ufrn.dimap.collaborativecanvas.reactivegameservice.model.JogadaPlayerDTO;
 import br.ufrn.dimap.collaborativecanvas.reactivegameservice.model.PaintingDTO;
+import br.ufrn.dimap.collaborativecanvas.reactivegameservice.model.Player;
 import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
+import reactor.util.function.Tuple2;
 
 @Service
 public class GameService {
 
     @Autowired
 	private WebClient webClient;
+    @Autowired
+    private WebClient webClient2;
     
-    public Mono<PaintingDTO> play(PaintingDTO paint){
-        //RestTemplate restTemplate = new RestTemplate();
-        //String jogadaPlayerURL = "http://localhost:8085/player/play";
-        //String joagadaCanvaURL = "http://localhost:8093/painting";
-        //HttpEntity<JogadaPlayerDTO> requestPlayer = new HttpEntity<>(new JogadaPlayerDTO(paint.getPlayerId()));
-        //HttpEntity<JogadaCanvaDTO> requestCanva= new HttpEntity<>(new JogadaCanvaDTO(paint.getPixelId(), paint.getPlayerId(), paint.getCanvasId(), paint.getcolor()));
-        //ResponseEntity<Void> responsePlayer = restTemplate.exchange(jogadaPlayerURL, HttpMethod.PUT, requestPlayer, Void.class);
-        //ResponseEntity<Void> responseCanva = restTemplate.exchange(joagadaCanvaURL, HttpMethod.POST, requestCanva, Void.class);
-        //if( responsePlayer.getStatusCode().equals(HttpStatus.OK) && responseCanva.getStatusCode().equals(HttpStatus.OK)){
-        //if(responseCanva.getStatusCode().equals(HttpStatus.OK)){
-        //    return paint;
-        //}else {
-        //    return null;
-        //}
+    public Mono<Tuple2<PaintingDTO, Void>> play(PaintingDTO paint){
+        
+    	/*
         return this.webClient.post()
             .uri("http://localhost:8093/painting")
             .body(Mono.just(paint), PaintingDTO.class)
             .retrieve()
             .bodyToMono(PaintingDTO.class);
-
+            	*/
+    	Mono<PaintingDTO> responseCanva = jogarCanva(paint).subscribeOn(Schedulers.boundedElastic());
+    	JogadaPlayerDTO jogada = new JogadaPlayerDTO(paint.getPlayerId());
+    	Mono<Void> responsePlayer = jogarPlayer(jogada).subscribeOn(Schedulers.boundedElastic());
+	
+						
+    	return Mono.zip(responseCanva, responsePlayer);
+    }
+    
+    private Mono<Void> jogarPlayer(JogadaPlayerDTO paint) {
+    	return this.webClient.post()
+				.uri("http://localhost:8085/player/play")
+				.body(Mono.just(paint), JogadaPlayerDTO.class)
+				.retrieve()
+				.bodyToMono(Void.class);
+    }
+    private Mono<PaintingDTO> jogarCanva(PaintingDTO paint){
+    	return this.webClient.post()
+                .uri("http://localhost:8093/painting")
+                .body(Mono.just(paint), PaintingDTO.class)
+                .retrieve()
+                .bodyToMono(PaintingDTO.class);
     }
 }

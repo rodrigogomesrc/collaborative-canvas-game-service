@@ -8,9 +8,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.ufrn.dimap.collaborativecanvas.reactivegameservice.model.JogadaPlayerDTO;
 import br.ufrn.dimap.collaborativecanvas.reactivegameservice.model.PaintingDTO;
+import br.ufrn.dimap.collaborativecanvas.reactivegameservice.model.Player;
 import br.ufrn.dimap.collaborativecanvas.reactivegameservice.service.GameService;
 import reactor.core.publisher.Mono;
+import reactor.util.function.Tuple2;
 
 @RestController
 @RequestMapping("/play")
@@ -20,12 +23,13 @@ public class GameControler {
     public GameService gameService;
 
     @PostMapping(produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    public Mono<PaintingDTO> play(@RequestBody PaintingDTO paint) {
-        if (paint.getCanvasId() == null || paint.getPixelId() == null || paint.getPlayerId() == null || paint.getcolor() == null) {
-            return Mono.empty();
-        } else {
+    public Mono<Tuple2<PaintingDTO, Void>> play(@RequestBody PaintingDTO paint) {
+        //if (paint.getCanvasId() == null || paint.getPixelId() == null || paint.getPlayerId() == null || paint.getcolor() == null) {
+        //    return Mono.empty();
+        //} else {
             return gameService.play(paint);
-        }
+    	
+        //}
         
     }
 
