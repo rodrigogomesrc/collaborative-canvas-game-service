@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.ufrn.dimap.collaborativecanvas.reactivegameservice.model.JogadaPlayerDTO;
 import br.ufrn.dimap.collaborativecanvas.reactivegameservice.model.PaintingDTO;
-import br.ufrn.dimap.collaborativecanvas.reactivegameservice.model.Player;
 import br.ufrn.dimap.collaborativecanvas.reactivegameservice.service.GameService;
 import reactor.core.publisher.Mono;
 import reactor.util.function.Tuple2;
