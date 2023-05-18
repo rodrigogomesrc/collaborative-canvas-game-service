@@ -10,6 +10,11 @@ import java.util.concurrent.Executors;
 public class ThreadsConfig {
 
     @Conditional(UseVirtualThreadCondition.class)
+    @Bean(TaskExecutionAutoConfiguration.APPLICATION_TASK_EXECUTOR_BEAN_NAME)
+    public AsyncTaskExecutor asyncTaskExecutor() {
+        return new TaskExecutorAdapter(Executors.newVirtualThreadPerTaskExecutor());
+    }
+    @Conditional(UseVirtualThreadCondition.class)
     @Bean
     public TomcatProtocolHandlerCustomizer<?> protocolHandlerVirtualThreadExecutorCustomizer() {
         return protocolHandler -> {
