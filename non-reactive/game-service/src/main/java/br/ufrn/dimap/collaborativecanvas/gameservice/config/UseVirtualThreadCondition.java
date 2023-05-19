@@ -10,7 +10,7 @@ public class UseVirtualThreadCondition implements Condition {
 
     //@Value("${app.use-virtual-threads}")
     private boolean useVirtualThreads = true;
-
+   
     @Override
     public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
         System.out.println("=============== USING VIRTUAL THREADS: " + useVirtualThreads);
