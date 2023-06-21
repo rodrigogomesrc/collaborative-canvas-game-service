@@ -1,5 +1,6 @@
 package br.ufrn.dimap.collaborativecanvas.gameservice.config;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.task.TaskExecutionAutoConfiguration;
 import org.springframework.boot.web.embedded.tomcat.TomcatProtocolHandlerCustomizer;
 import org.springframework.context.annotation.Bean;
@@ -14,20 +15,17 @@ import java.util.concurrent.ExecutorService;
 
 @Configuration
 public class ThreadsConfig {
-	@Bean
-    AsyncTaskExecutor applicationTaskExecutor() {
-        // enable async servlet support
-        ExecutorService executorService = Executors.newVirtualThreadPerTaskExecutor();
-        return new TaskExecutorAdapter(executorService);
-    }
 
-    @Conditional(UseVirtualThreadCondition.class)
+
+	@ConditionalOnProperty(prefix = "app", name= "use-virtual-threads")
     @Bean(TaskExecutionAutoConfiguration.APPLICATION_TASK_EXECUTOR_BEAN_NAME)
     public AsyncTaskExecutor asyncTaskExecutor() {
+		System.out.println("=============== USING VIRTUAL THREADS =========");
         return new TaskExecutorAdapter(Executors.newVirtualThreadPerTaskExecutor());
     }
 
-    @Conditional(UseVirtualThreadCondition.class)
+ 
+    @ConditionalOnProperty(prefix = "app", name= "use-virtual-threads")
     @Bean
     public TomcatProtocolHandlerCustomizer<?> protocolHandlerVirtualThreadExecutorCustomizer() {
         return protocolHandler -> {
