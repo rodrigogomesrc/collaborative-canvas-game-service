@@ -1,5 +1,6 @@
 package br.ufrn.dimap.collaborativecanvas.gameservice.gameservice;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -13,10 +14,14 @@ import br.ufrn.dimap.collaborativecanvas.gameservice.models.PaintingDTO;
 
 @Service
 public class GameService {
+	@Autowired
+	RestTemplate restTemplate;
     public PaintingDTO play(PaintingDTO paint){
-        RestTemplate restTemplate = new RestTemplate();
-        String jogadaPlayerURL = "http://localhost:8085/player/play";
-        String joagadaCanvaURL = "http://localhost:8093/painting";
+        
+        //String jogadaPlayerURL = "http://localhost:8085/player/play";
+        //String joagadaCanvaURL = "http://localhost:8093/painting";
+        String jogadaPlayerURL = "http://player-service/player/play";
+        String joagadaCanvaURL = "http://canvas-service/painting";
         HttpEntity<JogadaPlayerDTO> requestPlayer = new HttpEntity<>(new JogadaPlayerDTO(paint.getPlayerId()));
         HttpEntity<JogadaCanvaDTO> requestCanva= new HttpEntity<>(new JogadaCanvaDTO(paint.getPixelId(), paint.getPlayerId(), paint.getCanvasId(), paint.getcolor()));
         ResponseEntity<Void> responsePlayer = restTemplate.exchange(jogadaPlayerURL, HttpMethod.POST, requestPlayer, Void.class);
