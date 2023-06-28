@@ -14,6 +14,7 @@ public class GameServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(GameServiceApplication.class, args);
 	}
+	
 	@LoadBalanced
 	@Bean
 	public RestTemplate getRestTemplate() {
