@@ -22,11 +22,12 @@ import reactor.util.function.Tuple2;
 
 @Service
 public class GameService {
-
+	@Autowired
+    private WebClient.Builder webClientBuilder;
     @Autowired
-	private WebClient webClient;
+	private WebClient.Builder webClient;
     @Autowired
-    private WebClient webClient2;
+    private WebClient.Builder webClient2;
     
     private final ExecutorService executorService = Executors.newVirtualThreadPerTaskExecutor();
     private final Scheduler virtualScheduler = Schedulers.fromExecutorService(executorService);
@@ -35,14 +36,14 @@ public class GameService {
     	
     
        // return Mono.fromCallable(() -> {
-        	Mono<Void> responsePlayer = this.webClient.post()
-    				.uri("http://localhost:8085/player/play")
+        	Mono<Void> responsePlayer = this.webClient.build().post()
+    				.uri("http://PLAYER-SERVICE/player/play")
     				.body(Mono.just(new JogadaPlayerDTO(paint.getPlayerId())), JogadaPlayerDTO.class)
     				.retrieve()
     				.bodyToMono(Void.class).subscribeOn(virtualScheduler);
         	
-        	Mono<PaintingDTO> responseCanva = this.webClient2.post()
-                    .uri("http://localhost:8093/painting")
+        	Mono<PaintingDTO> responseCanva = this.webClient2.build().post()
+                    .uri("http://CANVAS-SERVICE/painting")
                     .body(Mono.just(paint), PaintingDTO.class)
                     .retrieve()
                     .bodyToMono(PaintingDTO.class).subscribeOn(virtualScheduler);

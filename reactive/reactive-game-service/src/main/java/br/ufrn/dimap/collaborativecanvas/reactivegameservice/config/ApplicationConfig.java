@@ -3,6 +3,7 @@ package br.ufrn.dimap.collaborativecanvas.reactivegameservice.config;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
@@ -13,8 +14,10 @@ import reactor.netty.resources.ConnectionProvider;
 
 @Configuration
 public class ApplicationConfig {
+	
 	@Bean
-    public WebClient webClient() {
+	@LoadBalanced
+    public WebClient.Builder webClient() {
         //return WebClient.create();
 		String connectionProviderName = "myConnectionProvider";
         HttpClient httpClient = HttpClient.create(ConnectionProvider.builder(connectionProviderName)
@@ -24,7 +27,7 @@ public class ApplicationConfig {
                 .build()
         );
         return WebClient.builder()
-                .clientConnector(new ReactorClientHttpConnector(httpClient)).build();
+                .clientConnector(new ReactorClientHttpConnector(httpClient));
     
     }
 }
