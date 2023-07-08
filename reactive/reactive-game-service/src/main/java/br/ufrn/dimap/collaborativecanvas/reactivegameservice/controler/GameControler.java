@@ -22,7 +22,7 @@ public class GameControler {
     public GameService gameService;
 
     @PostMapping(produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    public Mono<Tuple2<PaintingDTO, Void>> play(@RequestBody PaintingDTO paint) {
+    public Mono<String> play(@RequestBody PaintingDTO paint) {
         //if (paint.getCanvasId() == null || paint.getPixelId() == null || paint.getPlayerId() == null || paint.getcolor() == null) {
         //    return Mono.empty();
         //} else {
