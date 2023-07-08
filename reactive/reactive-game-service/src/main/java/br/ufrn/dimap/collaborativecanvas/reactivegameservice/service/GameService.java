@@ -4,15 +4,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import br.ufrn.dimap.collaborativecanvas.reactivegameservice.model.JogadaCanvaDTO;
 import br.ufrn.dimap.collaborativecanvas.reactivegameservice.model.JogadaPlayerDTO;
 import br.ufrn.dimap.collaborativecanvas.reactivegameservice.model.PaintingDTO;
 import reactor.core.publisher.Mono;
@@ -22,8 +16,7 @@ import reactor.util.function.Tuple2;
 
 @Service
 public class GameService {
-	@Autowired
-    private WebClient.Builder webClientBuilder;
+
     @Autowired
 	private WebClient.Builder webClient;
     @Autowired

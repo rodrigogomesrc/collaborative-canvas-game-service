@@ -32,11 +32,13 @@
 			<artifactId>reactor-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!--
 		<dependency>
 		    <groupId>org.springframework.cloud</groupId>
 		    <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		    <version>4.0.2</version>
 		</dependency>
+		-->
 	</dependencies>
 
 	<build>
@@ -44,13 +46,6 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<source>19</source>
-					<target>19</target>
-					<compilerArgs>
-						--enable-preview
-					</compilerArgs>
-				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
