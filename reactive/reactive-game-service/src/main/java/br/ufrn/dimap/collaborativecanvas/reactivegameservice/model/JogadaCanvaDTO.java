@@ -7,6 +7,9 @@ public class JogadaCanvaDTO {
     private Long canvasId;
     private String color;
 
+    public JogadaCanvaDTO() {
+    }
+
     public JogadaCanvaDTO(Long pixelId, Long playerId, Long canvasId, String color) {
         this.pixelId = pixelId;
         this.playerId = playerId;

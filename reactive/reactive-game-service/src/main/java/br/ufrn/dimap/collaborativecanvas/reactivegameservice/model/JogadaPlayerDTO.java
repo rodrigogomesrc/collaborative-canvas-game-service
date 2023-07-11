@@ -3,6 +3,9 @@ package br.ufrn.dimap.collaborativecanvas.reactivegameservice.model;
 public class JogadaPlayerDTO {
     private Long id;
 
+    public JogadaPlayerDTO() {
+    }
+
     public JogadaPlayerDTO(Long id) {
         this.id = id;
     }
