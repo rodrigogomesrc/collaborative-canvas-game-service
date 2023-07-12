@@ -1,7 +1,9 @@
 package br.ufrn.dimap.collaborativecanvas.reactivegameservice.model;
 
 
-public class PaintingDTO {
+import java.io.Serializable;
+
+public class PaintingDTO implements Serializable {
     private Long pixelId;
     private Long playerId;
     private Long canvasId;

@@ -18,9 +18,8 @@ public class GameService {
 	private StreamBridge streamBridge;
 
 	public Mono<String> play(PaintingDTO paint){
-		streamBridge.send("play", new JogadaPlayerDTO(paint.getPlayerId()));
-		streamBridge.send("painting", paint);
+		streamBridge.send("player-play-in", new JogadaPlayerDTO(paint.getPlayerId()));
+		streamBridge.send("canvas-painting-in", paint);
 		return Mono.just("ok");
-
 	}
 }
