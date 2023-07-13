@@ -20,7 +20,7 @@ public class GameController {
     @Bean
     public Function<PaintingDTO, String> play() {
         return message -> {
-            System.out.println("Message received in game-service: " + message);
+            //System.out.println("Message received in game-service: " + message);
             return this.gameService.play(message).subscribe().toString();
         };
     }
